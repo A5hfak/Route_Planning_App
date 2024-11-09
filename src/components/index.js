@@ -1,7 +1,0 @@
-export { default as Navbars } from './navbar'
-export { default as Sidebar } from './sidebar'
-export { default as MapComponent } from './map-component'
-export { default as ParentComponent } from './mother-component'
-export { default as SidebarComponent } from './parent-component'
-export { default as HistoryPanel } from './HistoryPanel'
-export { default as RoutePlanning } from './route-component'

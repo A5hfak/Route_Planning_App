@@ -1,0 +1,32 @@
+version: "3.3"
+
+services:
+  backend:
+    build:
+      context: ./rest # Path to the Spring Boot project folder
+      dockerfile: Dockerfile # Path to the Dockerfile in the backend
+    ports:
+      - "8080:8080" # Map port 8080 of the container to port 8080 of the host
+    networks:
+      - app-network # Network for communication between services
+    depends_on:
+      - frontend # Ensure frontend is started before backend
+    # Optional: Comment out for initial build
+    # volumes:
+    #   - ./rest:/app  # Optional: bind mount your project for dev mode
+
+  frontend:
+    build:
+      context: ./client # Path to the React project folder
+      dockerfile: Dockerfile # Path to the Dockerfile in the frontend
+    ports:
+      - "3000:3000" # Map port 3000 of the container to port 3000 of the host (React dev server)
+    volumes:
+      - ./client/src:/app/src # Bind-mount the React source code to enable hot-reloading
+      - /app/node_modules # Ensure node_modules are installed inside the container
+    networks:
+      - app-network # Network for communication between services
+
+networks:
+  app-network:
+    driver: bridge
